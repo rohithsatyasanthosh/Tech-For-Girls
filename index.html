@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech for Girls Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --secondary-color: #a8e063;
+            --text-color: #2d3436;
+            --light-bg: rgba(255, 255, 255, 0.95);
+            --dark-bg: rgba(45, 52, 54, 0.95);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(135deg, #f5e6ea 0%, #e7e6f7 50%, #d6f2ef 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Registration Form Container */
+        .registration-container {
+            background: var(--light-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #bdb7c6 10%, #c7b8ea 70%, #b4d2d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.2);
+        }
+
+        .share-section {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .share-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .share-btn {
+            flex: 1;
+            padding: 1rem;
+            background: linear-gradient(90deg, #25d366 0%, #54e39a 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn:hover {
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .share-counter {
+            padding: 0.5rem 1rem;
+            background: rgba(108, 92, 231, 0.1);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #5b40c4;
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .upload-section {
+            background: var(--light-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .upload-status {
+            margin-top: 1rem;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+
+        .upload-status.success {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: #4caf50;
+        }
+
+        .upload-status.error {
+            background-color: rgba(244, 67, 54, 0.1);
+            color: #f44336;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .registration-container {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .share-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-container fade-in">
+        <h1>Tech for Girls Registration</h1>
+        <form id="registrationForm" autocomplete="off">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required maxlength="30" placeholder="Enter your name">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required maxlength="10" placeholder="Enter phone number">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required placeholder="Enter email">
+            </div>
+
+            <div class="form-group">
+                <label for="college">College Name</label>
+                <input type="text" id="college" name="college" required maxlength="50" placeholder="Enter college name">
+            </div>
+
+            <div class="share-section">
+                <div class="share-row">
+                    <button type="button" id="whatsappShareBtn" class="share-btn">
+                        <i class="fab fa-whatsapp"></i> Share on WhatsApp
+                    </button>
+                    <span id="shareCounter" class="share-counter">Click count: 0/5</span>
+                </div>
+                <div class="upload-section">
+                    <label for="screenshot">Upload WhatsApp Share Screenshot</label>
+                    <input type="file" id="screenshot" accept="image/*" required>
+                    <div id="uploadStatus" class="upload-status"></div>
+                </div>
+                <div class="upload-section">
+                    <label for="googleSheet">Upload Google Sheet</label>
+                    <input type="file" id="googleSheet" accept=".xlsx,.xls,.csv" required>
+                    <div id="sheetUploadStatus" class="upload-status"></div>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="submit-btn" disabled>Submit Registration</button>
+        </form>
+    </div>
+
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        // Initialize Google Sheets API
+        function initClient() {
+            gapi.client.init({
+                'apiKey': 'YOUR_API_KEY', // Replace with your Google API key
+                'discoveryDocs': ['https://sheets.googleapis.com/$discovery/rest?version=v4']
+            }).then(function() {
+                console.log('Google Sheets API initialized');
+            });
+        }
+
+        // Load Google API client
+        function loadClient() {
+            gapi.client.load('sheets', 'v4', function() {
+                console.log('Google Sheets API loaded');
+            });
+        }
+
+        // Submit to Google Sheets
+        async function submitToGoogleSheets(data) {
+            try {
+                const response = await fetch('YOUR_SHEETS_API_ENDPOINT', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                return result;
+            } catch (error) {
+                console.error('Error submitting to Google Sheets:', error);
+                throw error;
+            }
+        }
+
+        // Initialize variables
+        let shareCount = 0;
+        const shareLimit = 5;
+        const shareBtn = document.getElementById('whatsappShareBtn');
+        const shareCounter = document.getElementById('shareCounter');
+        const submitBtn = document.getElementById('submitBtn');
+        const screenshotInput = document.getElementById('screenshot');
+        const uploadStatus = document.getElementById('uploadStatus');
+        const googleSheetInput = document.getElementById('googleSheet');
+        const sheetUploadStatus = document.getElementById('sheetUploadStatus');
+        const form = document.getElementById('registrationForm');
+
+        // WhatsApp Share Button Logic
+        shareBtn.addEventListener('click', () => {
+            if (shareCount >= shareLimit) {
+                alert('You have already shared the maximum number of times!');
+                return;
+            }
+
+            const msg = encodeURIComponent("Hey Buddy, Join Tech For Girls Community!");
+            const url = https://wa.me/?text=${msg};
+            window.open(url, '_blank');
+            
+            shareCount++;
+            shareCounter.textContent = Click count: ${shareCount}/${shareLimit};
+            
+            if (shareCount >= shareLimit) {
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Screenshot Upload Handling
+        screenshotInput.addEventListener('change', async function () {
+            const file = this.files[0];
+            if (!file) return;
+            
+            uploadStatus.textContent = 'Uploading...';
+            uploadStatus.className = 'upload-status';
+            
+            // Simulate upload
+            setTimeout(() => {
+                uploadStatus.textContent = 'Screenshot uploaded successfully!';
+                uploadStatus.className = 'upload-status success';
+                submitBtn.textContent = 'Submit Registration';
+            }, 1500);
+        });
+
+        // Google Sheet Upload Handling
+        googleSheetInput.addEventListener('change', async function () {
+            const file = this.files[0];
+            if (!file) return;
+
+            // Check file type
+            if (!file.name.match(/\.(xlsx|xls|csv)$/)) {
+                sheetUploadStatus.textContent = 'Please upload a valid Excel or CSV file';
+                sheetUploadStatus.className = 'upload-status error';
+                return;
+            }
+
+            sheetUploadStatus.textContent = 'Processing sheet...';
+            sheetUploadStatus.className = 'upload-status';
+
+            try {
+                // Simulate processing
+                await new Promise(resolve => setTimeout(resolve, 2000));
+
+                sheetUploadStatus.textContent = 'Sheet processed successfully!';
+                sheetUploadStatus.className = 'upload-status success';
+            } catch (error) {
+                sheetUploadStatus.textContent = 'Error processing sheet: ' + error.message;
+                sheetUploadStatus.className = 'upload-status error';
+            }
+        });
+
+        // Form Submission
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Add timestamp
+            data.timestamp = new Date().toISOString();
+            
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Submit to Google Sheets
+                await submitToGoogleSheets(data);
+                
+                // Reset form
+                form.reset();
+                shareCount = 0;
+                shareCounter.textContent = Click count: ${shareCount}/${shareLimit};
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Submit Registration';
+                uploadStatus.textContent = '';
+                sheetUploadStatus.textContent = '';
+                
+                alert('Registration successful! Your details have been saved to our database.');
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while submitting your registration. Please try again.');
+                submitBtn.textContent = 'Submit Registration';
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Initialize Google API
+        window.onload = function() {
+            initClient();
+            loadClient();
+        };
+
+        // Add smooth scrolling for any anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
